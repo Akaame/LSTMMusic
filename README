@@ -19,12 +19,16 @@ Eğitilmiş model ağırlıklarını daha sonra beste yapmak için kullanabiliri
 
 Predict ile modeli kullanarak şarkı oluşturabiliriz.
 
+Not:
+* 1300'e yakın nota+akor var. Bu sınıflandırma görevini güçleştiriyor. Uzun süre eğitmek gerekiyor.
+
 Eksiklikler:
 * Bütün şarkılar arka arkaya eklenmiş halde sanki bir şarkılarmışcasına. 
 Fakat bu doğru değil çünkü çoğunun bestelendiği anahtar birbirinden farklı
+Bunun yerine o şarkının gamına göre davranmamız gerekiyor.
 
-* Notaların arasındaki oktav farklarını yok saydık.
-
-* 1300'e yakın nota+akor var. Bu sınıflandırma görevini güçleştiriyor.
+* Notaların arasındaki oktav farklarını yok saydık. 
+Bunu yapabilmek için çok büyük bir verisetine ihtiyaç var
 
 * MIDI dosyalarından çok parçalı olanlardan ilk parçayı alıyorum sadece.
+Yani parça iki gitar ile çalınıyorsa ilk gitarın notalarını alıyorum yalnızca

@@ -11,9 +11,10 @@ from keras_gradient_noise import add_gradient_noise
 def get_model(input_shape, output_shape):
     m = Sequential()
     m.add(LSTM(1024, return_sequences=True, input_shape=input_shape))
-    m.add(Dropout(0.2))
-    m.add(LSTM(1024))
-    #m.add(Dense(512))
+    #m.add(Dropout(0.2))
+    m.add(LSTM(512))
+    #m.add(Dropout(0.2))
+    m.add(Dense(512))
     m.add(Dense(256,activation="relu"))
     m.add(Dense(output_shape,activation="softmax"))
     return m
@@ -22,14 +23,19 @@ def get_model(input_shape, output_shape):
 print data.shape
 data_len = data.shape[0]
 feature_len = data.shape[1]  # girdi ve ciktini boyutu
-window_size = 100
+window_size = 40
 
+k = 200
 
-def data_gen(d, w_size):
+def data_gen(d, w_size, k):
     l = d.shape[0]
     for i in range(w_size, l - w_size - 1):
-        yield (d[i:i + w_size, :].reshape([1,window_size,-1]), d[i + w_size + 1].reshape([1,-1]))
-
+        ret_X = []
+        ret_y = []
+        for idx in range(k):
+            ret_X.append(d[i+idx:i+idx + w_size, :])
+            ret_y.append(d[i+idx + w_size + 1])
+        yield (np.array(ret_X), np.array(ret_y))
 
 m = get_model((window_size, feature_len), feature_len)
 print m.summary()
@@ -38,6 +44,6 @@ rms = add_gradient_noise(RMSprop)
 m.compile(optimizer=rms(), loss="categorical_crossentropy",
           metrics=["accuracy"])
 
-m.fit_generator(data_gen(data, window_size), steps_per_epoch=5000, epochs=1)
+m.fit_generator(data_gen(data, window_size,k), steps_per_epoch=100, epochs=400)
 m.save("model")
 # model fit et ve agirliklari sakla
