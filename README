@@ -1,0 +1,30 @@
+Training data için kullandığım veri
+
+classicalguitarmidi.com 
+
+adresindeki Isaac Albeniz'e ait parçalardan oluşuyor.
+
+Midi dosyalarıyla etkileşime geçmek için Music21 isimli Python kütüphanesini kullandım.
+
+Glob kullanarak data klasöründeki her mid dosyasının ismine eriştim
+Music21 ile dosyaları okuyup içlerinden notaları ve akorları çıkardım.
+
+Bunları bir liste haline tutacağız. 
+
+Sonra kategorik olan bu veriyle çalışabilmek için OHE kullanacağız.
+
+Sonra da Sliding Window stilinde veri üzerinde ilerleyip LSTM'e girdi olarak vereceğiz.
+
+Eğitilmiş model ağırlıklarını daha sonra beste yapmak için kullanabiliriz.
+
+Predict ile modeli kullanarak şarkı oluşturabiliriz.
+
+Eksiklikler:
+* Bütün şarkılar arka arkaya eklenmiş halde sanki bir şarkılarmışcasına. 
+Fakat bu doğru değil çünkü çoğunun bestelendiği anahtar birbirinden farklı
+
+* Notaların arasındaki oktav farklarını yok saydık.
+
+* 1300'e yakın nota+akor var. Bu sınıflandırma görevini güçleştiriyor.
+
+* MIDI dosyalarından çok parçalı olanlardan ilk parçayı alıyorum sadece.
