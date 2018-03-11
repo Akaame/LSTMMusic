@@ -1,3 +1,9 @@
-Prediction kısmını yaz TODO
-Predictiondan şarkı üretip mid olarak kaydet TODO
+Temel
+Prediction kısmını yaz TODO DONE
+Predictiondan şarkı üretip mid olarak kaydet TODO DONE
+Üretimi test et
+Dropout'lu versiyonu test et
+Save the best model callback
+
+İleri seviye
 Gamlara göre çalışacak şekilde sistemi değiştir TODO
